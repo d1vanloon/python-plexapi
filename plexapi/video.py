@@ -77,20 +77,6 @@ class Video(PlexPartialObject):
         self._server.query(key)
         self.reload()
 
-    def setViewOffset(self, offset):
-        """ Set the view offset for this video.
-
-        Note that setting the offset to 0 will not work.
-        Use `markWatched` or `markUnwatched` to achieve
-        that goal.
-        
-        Parameters:
-            offset (int): the new view offset (in milliseconds)
-        """
-        key = '/:/progress?key=%s&identifier=com.plexapp.plugins.library&time=%d' % (self.ratingKey, offset)
-        self._server.query(key)
-        self.reload()
-
 
 @utils.registerPlexObject
 class Movie(Video, Playable):

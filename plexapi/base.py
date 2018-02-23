@@ -541,6 +541,20 @@ class Playable(object):
         key = '/status/sessions/terminate?sessionId=%s&reason=%s' % (self.session[0].id, quote_plus(reason))
         return self._server.query(key)
 
+    def setViewOffset(self, offset):
+        """ Set the view offset for this item.
+
+        Note that setting the offset to 0 will not work.
+        Use `markWatched` or `markUnwatched` to achieve
+        that goal.
+        
+        Parameters:
+            offset (int): the new view offset (in milliseconds)
+        """
+        key = '/:/progress?key=%s&identifier=com.plexapp.plugins.library&time=%d' % (self.ratingKey, offset)
+        self._server.query(key)
+        self.reload()
+
 
 @utils.registerPlexObject
 class Release(PlexObject):
